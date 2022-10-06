@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Phongban extends Model
+{
+    protected $table="phongban";
+    protected $filltable=[
+        'id',
+        'ma_pb',
+        'ten_pb',
+
+    ];
+    use HasFactory;
+}
