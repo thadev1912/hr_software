@@ -1,7 +1,6 @@
 @extends('layout.main')
 @section('main_body')
-<div class="container">
-<div class="card-body">
+
 <div class="card-header ">
                     <div class="row">
                                   <div class="col-md-12" align="center">
@@ -38,6 +37,5 @@
 
 </div>
 
-    </div>
-    </div>
+ 
     @endsection

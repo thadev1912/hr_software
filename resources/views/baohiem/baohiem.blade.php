@@ -1,8 +1,8 @@
 @extends('layout.main')
 @section('main_body')
-        <div class="container">
+
           
-          <div class ="col-sm-12 border ">
+        
                <div class="card-header bg-danger">
                     <div class="row">
                                   <div class="col-md-12" align="center">
@@ -62,7 +62,7 @@
               </div>
            </div>
            
-</div> <!--||KẾT THÚC VÙNG CHIA DIV THÀNH 2 PHẦN||-->
-       </div>
+
+      
        @endsection
 

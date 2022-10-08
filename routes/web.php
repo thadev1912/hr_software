@@ -6,7 +6,7 @@ use App\Http\Controllers\NhanvienController;
 use App\Http\Controllers\PhongbanController;
 use App\Http\Controllers\HopdongController;
 use App\Http\Controllers\BaohiemController;
-
+use App\Http\Controllers\ChucvuController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +19,10 @@ use App\Http\Controllers\BaohiemController;
 */
 //Danh mục Nhân Viên
 
- Route::get('/nhanvien',[NhanvienController::class,'nhanvien'])
+ Route::get('/',[NhanvienController::class,'nhanvien'])
  ->name('nhanvien');
+ Route::get('/thongkenhanvien',[NhanvienController::class,'thongke_nhanvien'])
+ ->name('thongke_nhanvien');
   Route::get('/themnhanvien',[NhanvienController::class,'them_nv'])
  ->name('them_nv');
  Route::post('/luunhanvien',[NhanvienController::class,'luu_nv'])
@@ -38,18 +40,32 @@ use App\Http\Controllers\BaohiemController;
 
  Route::get('/phongban',[PhongbanController::class,'phongban'])
  ->name('phongban');
-  Route::get('/them',[PhongbanController::class,'them_pb'])
+  Route::get('/themphongban',[PhongbanController::class,'them_pb'])
  ->name('them_pb');
- Route::post('/luu',[PhongbanController::class,'luu_pb'])
+ Route::post('/luuphongban',[PhongbanController::class,'luu_pb'])
  ->name('luu_pb');
- Route::get('/sua/{id}',[PhongbanController::class,'sua_pb'])
+ Route::get('/suaphongban/{id}',[PhongbanController::class,'sua_pb'])
  ->name('sua_pb');
- Route::post('/capnhat/{id}',[PhongbanController::class,'capnhat_pb'])
+ Route::post('/capnhatphongban/{id}',[PhongbanController::class,'capnhat_pb'])
  ->name('capnhat_pb');
- Route::get('/xoa/{id}',[PhongbanController::class,'xoa_pb'])
+ Route::get('/xoaphongban/{id}',[PhongbanController::class,'xoa_pb'])
  ->name('xoa_pb');
 
 
+//Danh mục Chức Vụ
+
+ Route::get('chucvu',[ChucvuController::class,'chucvu'])
+->name('chucvu');
+Route::get('/themchucvu',[ChucvuController::class,'them_cv'])
+->name('them_cv');
+Route::post('/luuchucvu',[ChucvuController::class,'luu_cv'])
+->name('luu_cv');
+Route::get('/suachucvu/{id}',[ChucvuController::class,'sua_cv'])
+->name('sua_cv');
+Route::post('/capnhatchucvu/{id}',[ChucvuController::class,'capnhat_cv'])
+->name('capnhat_cv');
+Route::get('/xoachucvu/{id}',[ChucvuController::class,'xoa_cv'])
+->name('xoa_cv');
  
  //Danh mục Hợp đồng
 
@@ -63,7 +79,7 @@ use App\Http\Controllers\BaohiemController;
  ->name('sua_hd');
  Route::post('/capnhathopdong/{id}',[HopdongController::class,'capnhat_hd'])
  ->name('capnhat_hd');
- Route::get('/xoa/{id}',[HopdongController::class,'xoa_hd'])
+ Route::get('/xoahopdong/{id}',[HopdongController::class,'xoa_hd'])
  ->name('xoa_hd');
 
 
@@ -81,6 +97,22 @@ use App\Http\Controllers\BaohiemController;
   ->name('capnhat_bhxh');
   Route::get('/xoa/{id}',[BaohiemController::class,'xoa_bhxh'])
   ->name('xoa_bhxh');
+
+
+    //Danh mục Chức Vụ
+
+    Route::get('baohiem',[BaohiemController::class,'baohiem'])
+    ->name('baohiem');
+     Route::get('/thembaohiem',[BaohiemController::class,'them_bhxh'])
+    ->name('them_bhxh');
+    Route::post('/luubaohiem',[BaohiemController::class,'luu_bhxh'])
+    ->name('luu_bhxh');
+    Route::get('/suabaohiem/{id}',[BaohiemController::class,'sua_bhxh'])
+    ->name('sua_bhxh');
+    Route::post('/capnhatbaohiem/{id}',[BaohiemController::class,'capnhat_bhxh'])
+    ->name('capnhat_bhxh');
+    Route::get('/xoa/{id}',[BaohiemController::class,'xoa_bhxh'])
+    ->name('xoa_bhxh');
  
 
 

@@ -460,11 +460,11 @@
                   
             <!-- End of Main Content -->
 
-            <div class="container my-auto">
+           
 
                 <!-- SRART RENDER BODY-->
                 @yield('main_body')
-</div>
+
                  <!-- SRART RENDER BODY-->
 
             <!-- Footer -->

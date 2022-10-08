@@ -1,7 +1,6 @@
 @extends('layout.main')
 @section('main_body')
-<div class="container">
-<div class="card-body">
+
 <div class="card-header ">
                     <div class="row">
                                   <div class="col-md-12" align="center">
@@ -18,17 +17,16 @@
                               
                     </div>
                    <div class="col">
-                        <label>CHỨC VỤ</label>
-                        <input id="new-pass-control" name="txt_ma_cv" class="form-control" type="text" value="{!!$data->ma_cv!!}">
+                        <label>MÃ NHÂN VIÊN</label>
+                        <input id="new-pass-control" name="txt_ma_nv" class="form-control" type="text" value="{!!$data->ma_nv!!}">
                               
                     </div>
 </div>
 
 <div class="form-row"> <!--thuộc tính form-row nó giúp chia 2 cột trên 1 row của nó-->
 <div class="col">
-                        <label>PHÒNG BAN</label>
-                        <input id="new-pass-control" name="txt_ma_pb" class="form-control" type="text" value="{!!$data->ma_pb!!}">
-                                
+<label>NGÀY VÀO LÀM</label>
+                        <input id="current-pass-control" name="txt_ngayvao" class="form-control" type="text" value="{!!$data->ngayvao!!}">       
                     </div>                  
 <div class="col">
                         <label>HỆ SỐ LƯƠNG</label>
@@ -37,14 +35,7 @@
                     </div>
                  
 </div>
-<div class="form-row"> <!--thuộc tính form-row nó giúp chia 2 cột trên 1 row của nó-->
-                    <div class="col">
-                        <label>NGÀY VÀO LÀM</label>
-                        <input id="current-pass-control" name="txt_ngayvao" class="form-control" type="text" value="{!!$data->ngayvao!!}">
-                              
-                    </div>
-                   
-</div>
+
 
 
 
@@ -56,6 +47,5 @@
 
 </div>
 
-    </div>
-    </div>
+ 
     @endsection

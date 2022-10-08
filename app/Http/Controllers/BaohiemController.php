@@ -18,6 +18,26 @@ class BaohiemController extends Controller
       }
       public function luu_bhxh(Request $request)
        {
+        $request->validate([
+          
+            'txt_ma_bhxh'=>'required',
+            'txt_ma_nv'   =>'required',
+            'txt_loai_bhxh'=>'required',
+            'txt_ngaycap'  =>'required',
+            'txt_ngayhethan'=>'required',
+            'txt_noicap'=>'required',
+          ],
+          [
+            'txt_ma_bhxh.required' =>'Mã bảo hiểm xã hội không được để trống',
+            'txt_ma_nv.required' =>'Mã nhân viên không được để trống',
+            'txt_loai_bhxh.required' =>'Mã nhân viên không được để trống',
+            'txt_ngaycap.required' =>'Ngày cấp không được để trống',
+            'txt_ngayhethan.required' =>'Ngày hết hạn không được để trống',
+            'txt_noicap.required' =>'Nơi cấp không được để trống',
+            
+          ]
+          ); 
+
         DB::table('baohiem')->insert([
               'ma_bhxh'=>$request->txt_ma_bhxh,
               'ma_nv'=>$request->txt_ma_nv,

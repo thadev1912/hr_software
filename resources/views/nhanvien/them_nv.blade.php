@@ -1,7 +1,6 @@
 @extends('layout.main')
 @section('main_body')
-<div class="container">
-<div class="card-body">
+
 <div class="card-header ">
                     <div class="row">
                                   <div class="col-md-12" align="center">
@@ -9,22 +8,27 @@
                                   </div>
                     
                      </div>
+                     @if($errors->any())
+                <div class="alert alert-danger text-center">
+                    Vui lòng kiểm tra lại!!!
+                </div>
+                @endif
             <form action="{!! URL::route('luu_nv')!!}" method="POST">
             <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
             <div class="form-row"> <!--thuộc tính form-row nó giúp chia 2 cột trên 1 row của nó-->
                     <div class="col">
                         <label>Mã Số Nhân Viên</label>
                         <input id="current-pass-control" name="txt_ma_nv" class="form-control" type="text" value="{!! old('txt_ma_nv') !!}">
-                                <div>
-                                    {!! $errors->first('txtMa') !!}
-                                </div>
+                           @error('txt_ma_nv')
+                             <span class='text-danger'> {{$message}}  </span>
+                           @enderror  
                     </div>
                    <div class="col">
                         <label>Họ và Tên Nhân Viên</label>
                         <input id="new-pass-control" name="txt_hoten_nv" class="form-control" type="text" value="{!! old('txt_hoten_nv') !!}">
-                                <div>
-                                    {!! $errors->first('txtTen') !!}
-                                </div>
+                        @error('txt_hoten_nv')
+                             <span class='text-danger'> {{$message}} </span>
+                           @enderror  
                     </div>
 </div>
 
@@ -32,16 +36,16 @@
 <div class="col">
                         <label>Điện Thoại</label>
                         <input id="new-pass-control" name="txt_sdt_nv" class="form-control" type="text" value="{!! old('txt_sdt_nv') !!}">
-                                <div>
-                                    {!! $errors->first('txtpban') !!}
-                                </div>
+                                @error('txt_sdt_nv')
+                                  <span class="text-danger">{{$message}}</span>
+                                  @enderror
                     </div>                  
 <div class="col">
                         <label>Giới Tính</label>
                         <input id="current-pass-control" name="txt_gioitinh_nv" class="form-control" type="text" value="{!! old('txt_gioitinh_nv') !!}">
-                                <div>
-                                    {!! $errors->first('txtgioitinh') !!}
-                                </div>
+                               @error('txt_gioitinh_nv')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                     </div>
                  
 </div>
@@ -49,9 +53,9 @@
                     <div class="col">
                         <label>Địa chỉ</label>
                         <input id="current-pass-control" name="txt_diachi_nv" class="form-control" type="text" value="{!! old('txt_diachi_nv') !!}">
-                                <div>
-                                    {!! $errors->first('txtns') !!}
-                                </div>
+                               @error('txt_diachi_nv')
+                                 <span class="text-danger">{{$message}}</span>
+                               @enderror
                     </div>
                    
 </div>
@@ -65,6 +69,4 @@
 
 </div>
 
-    </div>
-    </div>
     @endsection
