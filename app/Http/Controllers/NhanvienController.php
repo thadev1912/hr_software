@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Nhanvien;
+use App\Models\Phepnam;
 use DB;
 class NhanvienController extends Controller
 {
@@ -10,9 +11,16 @@ class NhanvienController extends Controller
     public function nhanvien()
     {
         
-        $nhanvien=nhanvien::paginate(3);
+        $nhanvien=nhanvien::paginate(5);
            
          return view('nhanvien.nhanvien',compact('nhanvien'))->with('i',(request()->input('page',1)-1)*3);
+   }
+   public function timkiem(Request $request)
+   {    
+        $timkiem=$request->timkiem;
+        $nhanvien=DB::table('nhanvien')->where('hoten_nv','like',"%".$timkiem."%")->paginate(5);
+       // dd($nhanvien);
+        return view('nhanvien.nhanvien',compact('nhanvien'));
    }
    //thêm nhân viên mới
    public function them_nv()
@@ -81,27 +89,55 @@ class NhanvienController extends Controller
                 DB::table('nhanvien')->where('id',$id)->delete();
                 return redirect()->route('nhanvien')->with('thongbao','Đã xóa nhân viên thành công');
             }
-             public function thongke_nhanvien()
+             public function ds_nhanvien()
              {
               $result= DB::table('nhanvien')
-              ->  join('phongban','nhanvien.ma_pb','=','phongban.ma_pb')
+              ->   join('phongban','nhanvien.ma_pb','=','phongban.ma_pb')
               ->   join('chucvu','nhanvien.ma_cv','=','chucvu.ma_cv')
               ->   join('hopdong','nhanvien.ma_nv','=','hopdong.ma_nv')
-              ->paginate(3);
+              ->   select('nhanvien.*','chucvu.ten_cv','phongban.ten_pb')
+              ->paginate(10);
              //   dd($nhanvien);
-               return view('nhanvien.thongke_nhanvien',compact('result'));  
+               return view('nhanvien.ds_nhanvien',compact('result'));  
 
              }
-             public function chitiet_nhanvien()
-             {
-              $result= DB::table('nhanvien')
-              ->  join('phongban','nhanvien.ma_pb','=','phongban.ma_pb')
-              ->   join('chucvu','nhanvien.ma_cv','=','chucvu.ma_cv')
-              ->   join('chucvu','nhanvien.ma_cv','=','chucvu.ma_cv')
-              ->   join('chucvu','nhanvien.ma_id','=','chucvu.id_hd')
-              ->paginate(3);
-             //   dd($nhanvien);
-               return view('nhanvien.thongke_nhanvien',compact('result'));  
+             public function timkiem_dsnhanvien(Request $request)
+             {    
+                  $timkiem=$request->timkiem_dsnhanvien;
+                
+                  $result=DB::table('nhanvien')
+                  ->   join('phongban','nhanvien.ma_pb','=','phongban.ma_pb')
+                  ->   join('chucvu','nhanvien.ma_cv','=','chucvu.ma_cv')
+                  ->   join('hopdong','nhanvien.ma_nv','=','hopdong.ma_nv')
+                  ->where('nhanvien.hoten_nv','like',"%".$timkiem."%")->paginate(5);
+                 // dd($result);
+                  return view('nhanvien.ds_nhanvien',compact('result'));
              }
-   
+             public function chitiet_nhanvien($id)
+             {
+              $data= DB::table('nhanvien')
+           
+              ->   join('hopdong','nhanvien.ma_nv','=','hopdong.ma_nv')
+              ->   join('baohiem','nhanvien.ma_nv','=','baohiem.ma_nv')
+              ->   join('phongban','nhanvien.ma_pb','=','phongban.ma_pb')
+              ->   join('chucvu','nhanvien.ma_cv','=','chucvu.ma_cv') 
+              ->   select('nhanvien.*','phongban.ten_pb','chucvu.ten_cv','hopdong.ma_hd','hopdong.ngayvao',
+                    'hopdong.tinhtrang','hopdong.loai_hd','baohiem.ma_bhxh','baohiem.loai_bhxh')           
+              ->   where('nhanvien.id',$id) ->first();
+           
+             $result=DB::table('khenthuong')->where('nhanvien.id',$id)
+             ->   join('nhanvien','khenthuong.ma_nv','=','nhanvien.ma_nv')
+             //->   select('nhanvien.id','nhanvien.hoten_nv','khenthuong.sotien','khenthuong.lydo','khenthuong.ngay_khenthuong')
+             ->first();
+             $info=DB::table('kyluat')->where('nhanvien.id',$id)
+             ->   join('nhanvien','kyluat.ma_nv','=','nhanvien.ma_nv')
+            // ->   select('nhanvien.id','nhanvien.hoten_nv','kyluat.sotien','kyluat.lydo','kyluat.ngay_kyluat')
+             ->first(); 
+              $phepnam=DB::table('phepnam')->where('nhanvien.id',$id)
+              ->   join('nhanvien','phepnam.ma_nv','=','nhanvien.ma_nv')
+              ->first();
+               return view('nhanvien.chitiet_nhanvien',compact('data','result','info','phepnam'));  
+           
+             }
+            
 }

@@ -9,7 +9,7 @@ class PhongbanController extends Controller
 {
     public function phongban()
         {
-            $phongban=DB::table('phongban')->paginate(3);        
+            $phongban=DB::table('phongban')->paginate(5);        
             return view('phongban.phongban',compact('phongban'));
             
         }
